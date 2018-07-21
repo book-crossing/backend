@@ -160,16 +160,19 @@ class UserController {
 
       if (password === foundUsers[0].password) {
         // generate and attach new token
+        let newToken;
         try {
           let ts = Math.round((new Date()).getTime() / 1000);
-          let newToken = this.sha512(`${Config.get('app.tokensalt')}${ts}`);
+          newToken = this.sha512(`${Config.get('app.tokensalt')}${ts}`);
           this.collection.updateOne({ username }, { $push: { tokens: { value: newToken, date: ts } } });
         } catch (e) {
           console.error(e);
           return BCResponse.buildFromError(1, 'Trying to set new token');
         }
 
-        return BCResponse.message('Logged in successfuly');
+        return BCResponse.build({
+          token: newToken
+        });
       } else {
         return BCResponse.buildFromError(2003);
       }
