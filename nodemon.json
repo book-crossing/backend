@@ -1,0 +1,8 @@
+{
+  "verbose": true,
+  "legacyWatch": true,
+  "ext": "js json env",
+  "ignoreRoot": [
+    ".git"
+  ]
+}

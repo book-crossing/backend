@@ -1,0 +1,19 @@
+{
+  "name": "bookcrossing",
+  "version": "1.0.0",
+  "description": "Bookcrossing backend app",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "repository": {},
+  "author": "kaskar2008",
+  "license": "MIT",
+  "dependencies": {
+    "ivy-js": "git://github.com/VeryWow/ivy-js.git#1.0",
+    "mongodb": "~3.0.8"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  }
+}

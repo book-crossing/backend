@@ -1,0 +1,18 @@
+{
+  "1": "Server error.",
+
+  "10": "Server error: Database connection error.",
+  "11": "Server error: Database insertion error.",
+
+  "1000": "Username must be a string.",
+  "1001": "Username is already taken.",
+  "1002": "Username must not be empty.",
+  "1003": "Username length must be more then 2 characters.",
+  "1004": "Username must have only digits and letters.",
+  "1005": "User not found.",
+
+  "2000": "Password must be a string.",
+  "2001": "Password must not be empty.",
+  "2002": "Password length must be more then 5 characters.",
+  "2003": "Wrong password."
+}
