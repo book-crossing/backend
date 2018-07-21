@@ -21,10 +21,7 @@ const routes = (route) => ({
   'api': {
     'user': {
       'register': route('POST', 'UserController@register', { middleware: 'body-parser' }),
-      'login': route('POST', 'UserController@login', { middleware: 'body-parser' }),
-
-      '/': route('GET', 'ApiUserController@index'),
-      ':id': route('GET', 'ApiUserController@user'),
+      'login': route('POST', 'UserController@login', { middleware: 'body-parser' })
     }
   }
 })
