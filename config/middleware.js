@@ -4,7 +4,8 @@ module.exports = {
    * binding: namespace
    */
   'middlewares': {
-      'body-parser': 'App/BodyParserMiddleware'
+    'body-parser': 'App/BodyParserMiddleware',
+    'auth': 'App/AuthMiddleware'
   },
 
   /**
@@ -12,5 +13,6 @@ module.exports = {
    * binding: [list of bindings]
    */
   'groups': {
+    "check-token": ['body-parser', 'auth']
   }
 };

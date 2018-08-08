@@ -212,11 +212,10 @@ class UserController {
 
         // check if session exists
         try {
-
           foundUser = await this.getUserFromToken(params.body.token);
 
           if (!foundUser) {
-            return BCResponse.buildFromError(1006);
+            return BCResponse.buildFromError(3000);
           }
         } catch (e) {
           console.error(e);
