@@ -208,13 +208,14 @@ class UserController {
   async logout (params) {
     if (DBClient.isConnected) {
       if (params.body.token) {
-        let foundUsers = [];
+        let foundUser = null;
 
         // check if session exists
         try {
-          foundUsers = await this.findUsers({ tokens: { $elemMatch: { value: params.body.token } } });
 
-          if (!foundUsers.length) {
+          foundUser = await this.getUserFromToken(params.body.token);
+
+          if (!foundUser) {
             return BCResponse.buildFromError(1006);
           }
         } catch (e) {
@@ -223,13 +224,29 @@ class UserController {
         }
 
         await this.collection.updateOne(
-          { _id: foundUsers[0]._id },
+          { _id: foundUser._id },
           { $pull: { 'tokens': { value: params.body.token } } }
         );
       }
       return BCResponse.message('Logged out successfuly');
     } else {
       return BCResponse.buildFromError(10);
+    }
+  }
+
+  /**
+   * Get user via token method
+   *
+   * @param {*} token
+   * @returns {User|null} User object or null
+   * @memberof UserController
+   */
+  async getUserFromToken (token) {
+    try {
+      let foundUsers = await this.findUsers({ tokens: { $elemMatch: { value: token } } });
+      return foundUsers.length ? foundUsers[0] : null;
+    } catch (e) {
+      throw e;
     }
   }
 }
