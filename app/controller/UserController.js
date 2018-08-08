@@ -46,6 +46,23 @@ class UserController {
     return (typeof val === 'string' ? !!(val.trim()) : !!val);
   }
 
+
+  /**
+   * Find users in the collection with specific query
+   *
+   * @param {*} params
+   * @returns {array} Array of founded users
+   * @memberof UserController
+   */
+  async findUsers(params) {
+    try {
+      return await (await this.collection.find(params)).toArray();
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+
   /**
    * User register method
    *
@@ -83,7 +100,7 @@ class UserController {
 
       // check if username is taken
       try {
-        let foundUsers = await (await this.collection.find({ username })).toArray();
+        let foundUsers = await this.findUsers({ username });
 
         if (foundUsers.length) {
           return BCResponse.buildFromError(1001);
@@ -137,7 +154,7 @@ class UserController {
 
       // check if user exists
       try {
-        foundUsers = await (await this.collection.find({ username })).toArray();
+        foundUsers = await this.findUsers({ username });
 
         if (!foundUsers.length) {
           return BCResponse.buildFromError(1005);
@@ -164,7 +181,7 @@ class UserController {
         try {
           let ts = Math.round((new Date()).getTime() / 1000);
           newToken = this.sha512(`${Config.get('app.tokensalt')}${ts}`);
-          this.collection.updateOne({ username }, { $push: { tokens: { value: newToken, date: ts } } });
+          await this.collection.updateOne({ username }, { $push: { tokens: { value: newToken, date: ts } } });
         } catch (e) {
           console.error(e);
           return BCResponse.buildFromError(1, 'Trying to set new token');
@@ -176,6 +193,41 @@ class UserController {
       } else {
         return BCResponse.buildFromError(2003);
       }
+    } else {
+      return BCResponse.buildFromError(10);
+    }
+  }
+
+  /**
+   * User logout method
+   *
+   * @param {*} params
+   * @returns {*} Response
+   * @memberof UserController
+   */
+  async logout (params) {
+    if (DBClient.isConnected) {
+      if (params.body.token) {
+        let foundUsers = [];
+
+        // check if session exists
+        try {
+          foundUsers = await this.findUsers({ tokens: { $elemMatch: { value: params.body.token } } });
+
+          if (!foundUsers.length) {
+            return BCResponse.buildFromError(1006);
+          }
+        } catch (e) {
+          console.error(e);
+          return BCResponse.buildFromError(1, 'Trying to check if session exists');
+        }
+
+        await this.collection.updateOne(
+          { _id: foundUsers[0]._id },
+          { $pull: { 'tokens': { value: params.body.token } } }
+        );
+      }
+      return BCResponse.message('Logged out successfuly');
     } else {
       return BCResponse.buildFromError(10);
     }

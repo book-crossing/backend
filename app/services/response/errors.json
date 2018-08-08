@@ -10,6 +10,7 @@
   "1003": "Username length must be more then 2 characters.",
   "1004": "Username must have only digits and letters.",
   "1005": "User not found.",
+  "1006": "Session is expired.",
 
   "2000": "Password must be a string.",
   "2001": "Password must not be empty.",
