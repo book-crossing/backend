@@ -11,6 +11,7 @@ module.exports = {
     app_path() + '/services/db/ServiceProvider',
     app_path() + '/services/response/ServiceProvider',
     app_path() + '/services/validator/ServiceProvider',
+    app_path() + '/services/book/ServiceProvider',
   ],
 
   /**

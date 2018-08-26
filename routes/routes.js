@@ -23,6 +23,9 @@ const routes = (route) => ({
       'register': route('POST', 'UserController@register', { middleware: 'body-parser' }),
       'login': route('POST', 'UserController@login', { middleware: 'body-parser' }),
       'logout': route('POST', 'UserController@logout', { middleware: 'check-token' }),
+    },
+    'book': {
+      'test': route('POST', 'BookController@test', { middleware: 'body-parser' })
     }
   }
 })
