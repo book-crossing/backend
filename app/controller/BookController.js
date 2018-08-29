@@ -1,10 +1,10 @@
-const DBClient = use('DBClient');
-const BCResponse = use('BCResponse');
-const BCBookService = use('BCBookService');
+const $DB = use('DBService');
+const $Response = use('ResponseService');
+const BookService = use('BookService');
 
 class BookController {
   test (params) {
-    let newBook = new BCBookService.Book().parse(params.body.book);
+    let newBook = new BookService.Book().parse(params.body.book);
     return newBook;
   }
 }

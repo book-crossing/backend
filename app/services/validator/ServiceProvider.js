@@ -1,3 +1,3 @@
-let BCValidator = require('.');
+let ValidatorService = require('.');
 
-singleton('BCValidator', () => new BCValidator());
+singleton('ValidatorService', () => new ValidatorService());

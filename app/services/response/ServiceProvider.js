@@ -1,3 +1,3 @@
 let ResponseBuilder = require('.');
 
-singleton('BCResponse', () => new ResponseBuilder());
+singleton('ResponseService', () => new ResponseBuilder());

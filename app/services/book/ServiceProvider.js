@@ -1,3 +1,3 @@
 let BookService = require('.');
 
-singleton('BCBookService', () => new BookService());
+singleton('BookService', () => new BookService());

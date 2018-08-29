@@ -1,3 +1,3 @@
 let UserService = require('.');
 
-singleton('BCUserService', () => new UserService());
+singleton('UserService', () => new UserService());

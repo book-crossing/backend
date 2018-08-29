@@ -16,6 +16,6 @@
   "2002": "Password length must be more then 5 characters.",
   "2003": "Wrong password.",
 
-  "3000": "Session is expired.",
+  "3000": "Token is expired.",
   "3001": "Token is required."
 }
