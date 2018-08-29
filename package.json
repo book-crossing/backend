@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "ivy-js": "git://github.com/VeryWow/ivy-js.git#1.0",
+    "js-simple-events": "^1.0.7",
     "mongodb": "~3.0.8"
   },
   "devDependencies": {

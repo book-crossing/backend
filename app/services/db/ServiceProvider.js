@@ -1,3 +1,3 @@
 let DBClient = require('.');
 
-singleton('DBClient', () => new DBClient());
+singleton('DBService', () => new DBClient());

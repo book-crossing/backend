@@ -2,6 +2,8 @@ require('dotenv').config();
 
 const MongoClient = require('mongodb').MongoClient;
 
+const $Events = use('EventService');
+
 const url = env('DB_CONNECTION_URL', null);
 const dbName = 'bookcrossing';
 
@@ -48,6 +50,7 @@ class DBClient {
           this.isConnected = true;
           console.log("Connected successfully to MDB server");
           this.db = client.db(dbName);
+          $Events.emit('db.connect');
         } else {
           console.error(err);
         }
