@@ -4,7 +4,7 @@ const $User = use('UserService');
 bind('App/AuthMiddleware', function () {
   return async function (data, next) {
     const token = data.route.params.body.token;
-    let foundUsers = [];
+    let foundUser = null;
 
     if (!token) {
       return $Response.buildFromError(3001)(data.response);
@@ -12,7 +12,7 @@ bind('App/AuthMiddleware', function () {
 
     try {
       foundUser = await $User.getUserFromToken(token);
-      if (foundUsers) {
+      if (foundUser) {
         next();
       } else {
         return $Response.buildFromError(3000)(data.response);

@@ -13,7 +13,7 @@ class UserService {
    *
    * @param {*} params
    * @returns {array} Array of founded users
-   * @memberof UserController
+   * @memberof UserService
    */
   async findUsers(params) {
     try {
@@ -29,13 +29,14 @@ class UserService {
    *
    * @param {*} token
    * @returns {User|null} User object or null
-   * @memberof UserController
+   * @memberof UserService
    */
   async getUserFromToken(token) {
     try {
       let foundUsers = await this.findUsers({ tokens: { $elemMatch: { value: token } } });
       return foundUsers.length ? foundUsers[0] : null;
     } catch (e) {
+      console.error(e);
       throw e;
     }
   }
@@ -58,6 +59,7 @@ class UserService {
 
       return true;
     } catch (e) {
+      console.error(e);
       throw e;
     }
   }

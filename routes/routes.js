@@ -20,12 +20,15 @@ const Route = use('Router');
 const routes = (route) => ({
   'api': {
     'user': {
-      'register': route('POST', 'UserController@register', { middleware: 'body-parser' }),
-      'login': route('POST', 'UserController@login', { middleware: 'body-parser' }),
-      'logout': route('POST', 'UserController@logout', { middleware: 'check-token' }),
+      'register': route('POST', 'UserController@register', { middleware: ['check-db', 'body-parser'] }),
+      'login': route('POST', 'UserController@login', { middleware: ['check-db', 'body-parser'] }),
+      'logout': route('POST', 'UserController@logout', { middleware: ['check-db', 'check-token'] }),
+      ':username': {
+        '/': route('GET', 'UserController@index', { middleware: ['check-db'] })
+      }
     },
     'book': {
-      'test': route('POST', 'BookController@test', { middleware: 'body-parser' })
+      'add': route('POST', 'BookController@add', { middleware: ['check-db', 'check-token'] })
     }
   }
 })
