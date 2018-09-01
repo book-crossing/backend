@@ -74,7 +74,10 @@ class BookController {
         let isClaimed = await $Book.claim(params.token, params.body.uid, params.body.owner);
 
         if (isClaimed) {
-          return $Response.payload(user.info.phone);
+          return $Response.payload({
+            phone: user.info.phone,
+            name: user.info.name
+          });
         } else {
           return $Response.buildFromError(4001);
         }
