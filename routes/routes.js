@@ -22,7 +22,7 @@ const routes = (route) => ({
     'user': {
       'register': route('POST', 'UserController@register', { middleware: ['check-db', 'body-parser'] }),
       'login': route('POST', 'UserController@login', { middleware: ['check-db', 'body-parser'] }),
-      'logout': route('POST', 'UserController@logout', { middleware: ['check-db', 'check-token'] }),
+      'logout': route('GET', 'UserController@logout', { middleware: ['check-db', 'auth'] }),
       ':username': {
         '/': route('GET', 'UserController@index', { middleware: ['check-db'] })
       }
