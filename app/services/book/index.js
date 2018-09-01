@@ -78,13 +78,15 @@ class BookService {
         return false;
       }
 
-      // TODO
-
       let foundBook = await this.findBook({ uid: newBook.info.uid });
 
       if (foundBook) {
         let username = await this.assignToUser(newBook.info.uid, token);
-        // newBook.info.ownedBy.push(username);
+
+        if (!~newBook.info.ownedBy.indexOf(username)) {
+          newBook.info.ownedBy.push(username);
+        }
+
         return newBook;
       } else {
         newBook.info.registeredAt = new Date().getTime();
@@ -92,7 +94,11 @@ class BookService {
 
         if (newBook.info.uid && insertionResult.result.ok) {
           let username = await this.assignToUser(newBook.info.uid, token);
-          // newBook.info.ownedBy.push(username);
+
+          if (!~newBook.info.ownedBy.indexOf(username)) {
+            newBook.info.ownedBy.push(username);
+          }
+
           return newBook;
         } else {
           return false
