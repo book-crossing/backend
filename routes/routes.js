@@ -18,6 +18,8 @@ const Route = use('Router');
  */
 
 const routes = (route) => ({
+  '/': route('GET', 'StaticController@render'),
+  'static/:type/:file': route('GET', 'StaticController@render'),
   'api': {
     'user': {
       'register': route('POST', 'UserController@register', { middleware: ['check-db', 'body-parser'] }),
