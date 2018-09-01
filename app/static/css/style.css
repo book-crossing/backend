@@ -108,6 +108,8 @@ p {
     -webkit-animation: blurify 10s steps(10) infinite;
     animation: blurify 10s steps(10) infinite;
     padding-top: 220px;
+    height: 100%;
+    box-sizing: border-box;
 }
 .wplauncher-countdown {
     font-family: 'Bowlby One', sans-serif;
@@ -157,7 +159,7 @@ p {
     font-size: 18px;
 }
 .copyrights a { color: #fff; }
-@-webkit-keyframes blurify { 
+@-webkit-keyframes blurify {
     0%, 100% {
         -moz-filter: blur(1px);
         -ms-filter: blur(1px);
@@ -219,7 +221,7 @@ p {
         filter: blur(1.7px);
     }
 }
-@-webkit-keyframes grain { 
+@-webkit-keyframes grain {
     0%, 100% {
         -webkit-transform: translate(0, 0);
         transform: translate(0, 0);
@@ -261,7 +263,7 @@ p {
         transform: translate(-10%, 10%);
     }
 }
-@keyframes grain { 
+@keyframes grain {
     0%, 100% {
         -webkit-transform: translate(0, 0);
         transform: translate(0, 0);
