@@ -28,7 +28,7 @@ class Book {
    * @returns Book
    * @memberof Book
    */
-  parse (bookFromAPI = {}) {
+  parse(bookFromAPI = {}) {
     Object.keys(ParserConfig).forEach(key => {
       if (typeof ParserConfig[key] === 'string') {
         if (ParserConfig[key][0] !== '=') {

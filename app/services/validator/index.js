@@ -7,7 +7,7 @@ class BCValidator {
    * @returns {boolean}
    * @memberof BCValidator
    */
-  isString (val) {
+  isString(val) {
     return typeof val === 'string';
   }
 
@@ -19,7 +19,7 @@ class BCValidator {
    * @returns {boolean}
    * @memberof BCValidator
    */
-  isNumber (val) {
+  isNumber(val) {
     return typeof val === 'number';
   }
 
@@ -31,7 +31,7 @@ class BCValidator {
    * @returns {boolean}
    * @memberof BCValidator
    */
-  notEmpty (val) {
+  notEmpty(val) {
     return !!val
   }
 
@@ -43,7 +43,7 @@ class BCValidator {
    * @returns {*} single rule callback result
    * @memberof BCValidator
    */
-  validate (val, rules) {
+  validate(val, rules) {
     try {
       for (var i = 0; i < rules.length; i++) {
         let result = true;

@@ -24,7 +24,7 @@ class UserController {
    * @returns {boolean}
    * @memberof UserController
    */
-  customNotEmptyValidator (val) {
+  customNotEmptyValidator(val) {
     return (typeof val === 'string' ? !!(val.trim()) : !!val);
   }
 
@@ -142,7 +142,7 @@ class UserController {
    * @returns {*} Response
    * @memberof UserController
    */
-  async login (params) {
+  async login(params) {
     let username = params.body.username;
     let password = params.body.password;
     let errorCode = 0;
@@ -206,7 +206,7 @@ class UserController {
    * @returns {*} Response
    * @memberof UserController
    */
-  async logout (params) {
+  async logout(params) {
     try {
       let token = params.token;
       let isRemoved = await $User.removeToken(token);
