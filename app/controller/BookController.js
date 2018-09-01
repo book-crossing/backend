@@ -90,7 +90,7 @@ class BookController {
   // TODO
   async confirmBorrow(params) {
     try {
-
+      return $Response.buildFromError(404);
     } catch (e) {
       console.error(e);
       return $Response.buildFromError(1, 'Trying to confirm a borrow. ' + e.message);
