@@ -8,7 +8,7 @@ class BookController {
       let foundBooks = await $Book.vendorFind(params.body.id);
       let bookData = foundBooks[0];
       let newBook = new $Book.Book({ comment: params.body.comment || '' }).parse(bookData);
-      let book = await $Book.add(newBook, params.body.token);
+      let book = await $Book.add(newBook, params.token);
       return $Response.message({ book });
     } catch (e) {
       console.error(e);

@@ -191,7 +191,8 @@ class UserController {
    */
   async logout (params) {
     try {
-      let isRemoved = await $User.removeToken(params.body.token);
+      let token = params.token;
+      let isRemoved = await $User.removeToken(token);
 
       if (!isRemoved) {
         return $Response.buildFromError(3000);
