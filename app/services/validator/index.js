@@ -36,7 +36,7 @@ class BCValidator {
   }
 
   /**
-   * Validate value through a bunch of rules
+   * Validate value through a bunch of rules.
    *
    * @param {*} val
    * @param {Array} rules

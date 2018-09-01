@@ -4,7 +4,7 @@ const errorCodes = require('./errors.json');
 
 class ResponseBuilder {
   /**
-   * Builds a response handler with data and options
+   * Builds a response handler with data and options.
    *
    * @param {*} data
    * @param {*} [options={}]
@@ -26,7 +26,7 @@ class ResponseBuilder {
   }
 
   /**
-   * Builds a message response
+   * Builds a message response.
    *
    * @param {*} message
    * @returns {function}
@@ -37,7 +37,7 @@ class ResponseBuilder {
   }
 
   /**
-   * Builds a payload response
+   * Builds a payload response.
    *
    * @param {*} payload
    * @returns {function}
@@ -48,7 +48,7 @@ class ResponseBuilder {
   }
 
   /**
-   * Builds an error response from error code with description
+   * Builds an error response from error code with description.
    *
    * @param {*} code
    * @param {string} [description='']

@@ -28,7 +28,9 @@ const routes = (route) => ({
       }
     },
     'book': {
-      'add': route('POST', 'BookController@add', { middleware: ['check-db', 'check-token'] })
+      'add': route('POST', 'BookController@add', { middleware: ['check-db', 'check-token'] }),
+      'list': route('GET', 'BookController@list', { middleware: ['check-db'] }),
+      'claim': route('POST', 'BookController@claim', { middleware: ['check-db', 'check-token'] }),
     }
   }
 })

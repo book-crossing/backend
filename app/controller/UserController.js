@@ -7,20 +7,18 @@ const $Config = use('Config');
 
 const showFields = [
   'username',
-  'registeredAt',
-  'info'
+  'registeredAt'
 ]
 
 /**
- * Controller for handling user specific requests
- * register, login
+ * Controller for handling user specific requests.
  *
  * @class UserController
  */
 class UserController {
 
   /**
-   * Custom method for validating "not empty" value
+   * Custom method for validating "not empty" value.
    *
    * @param {*} val
    * @returns {boolean}
@@ -30,8 +28,19 @@ class UserController {
     return (typeof val === 'string' ? !!(val.trim()) : !!val);
   }
 
+  /**
+   * Get user info.
+   *
+   * @param {*} params
+   * @returns {*} Response
+   * @memberof UserController
+   */
   async index(params) {
     let username = params.username;
+
+    if (!username) {
+      return $Response.buildFromError(1005);
+    }
 
     try {
       let foundUsers = await $User.findUsers({ username });
@@ -56,7 +65,7 @@ class UserController {
   }
 
   /**
-   * User register method
+   * User register method.
    *
    * @param {*} params
    * @returns {*} Response
@@ -127,7 +136,7 @@ class UserController {
   }
 
   /**
-   * User login method
+   * User login method.
    *
    * @param {*} params
    * @returns {*} Response
@@ -138,6 +147,14 @@ class UserController {
     let password = params.body.password;
     let errorCode = 0;
     let foundUsers = [];
+
+    if (!username) {
+      return $Response.buildFromError(1006);
+    }
+
+    if (!password) {
+      return $Response.buildFromError(2004);
+    }
 
     // check if user exists
     try {
@@ -183,7 +200,7 @@ class UserController {
   }
 
   /**
-   * User logout method
+   * User logout method.
    *
    * @param {*} params
    * @returns {*} Response

@@ -14,7 +14,7 @@ class BookService {
   }
 
   /**
-   * Find books in the collection with specific query
+   * Find books in the collection with specific query.
    *
    * @param {*} params
    * @returns {array} Array of founded books
@@ -24,13 +24,12 @@ class BookService {
     try {
       return await (await this.collection.find(params)).toArray();
     } catch (e) {
-      console.error(e);
       throw e;
     }
   }
 
   /**
-   * Find one book in the collection with specific query
+   * Find one book in the collection with specific query.
    *
    * @param {*} params
    * @returns {Book|null} Found book or null
@@ -41,11 +40,41 @@ class BookService {
       let found = await this.findBooks(params);
       return found.length ? found : null;
     } catch (e) {
-      console.error(e);
       throw e;
     }
   }
 
+  /**
+   * Claim a book from owner.
+   *
+   * @param {string} token Auth token
+   * @param {*} uid Book uid
+   * @param {*} owner Username
+   * @returns {boolean}
+   * @memberof BookService
+   */
+  async claim(token, uid, owner) {
+    try {
+      let user = await $User.getUserFromToken(token);
+
+      if (user) {
+        let updateResult = await this.collection.updateOne({ uid }, { $addToSet: { claimedBy: { owner, claimer: user.username } } });
+        return !!updateResult.result.n
+      } else {
+        return false;
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /**
+   * Find a book from google books API.
+   *
+   * @param {string} q Query
+   * @returns {array} List of found books
+   * @memberof BookService
+   */
   async vendorFind(q) {
     try {
       let response = await fetch(`https://www.googleapis.com/books/v1/volumes?printType=books&q=${q}&projection=lite&maxResults=25`);
@@ -56,6 +85,14 @@ class BookService {
     }
   }
 
+  /**
+   * Assign a book to a user.
+   *
+   * @param {*} uid Book uid
+   * @param {string} token Auth token
+   * @returns {string|boolean} Username or false
+   * @memberof BookService
+   */
   async assignToUser(uid, token) {
     try {
       let foundUser = await $User.getUserFromToken(token);
@@ -72,6 +109,14 @@ class BookService {
     }
   }
 
+  /**
+   * Add a new book to DB.
+   *
+   * @param {Book} newBook
+   * @param {string} token Auth token
+   * @returns {Book} Added book
+   * @memberof BookService
+   */
   async add(newBook, token) {
     try {
       if (!newBook.info.uid) {

@@ -9,7 +9,7 @@ class UserService {
   }
 
   /**
-   * Find users in the collection with specific query
+   * Find users in the collection with specific query.
    *
    * @param {*} params
    * @returns {array} Array of founded users
@@ -25,7 +25,23 @@ class UserService {
   }
 
   /**
-   * Get user via token method
+   * Find user in the collection with specific query.
+   *
+   * @param {*} params
+   * @returns {User|null} Found user or null
+   * @memberof UserService
+   */
+  async findUser(params) {
+    try {
+      return await this.collection.findOne(params) || null;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+
+  /**
+   * Get user via token method.
    *
    * @param {*} token
    * @returns {User|null} User object or null
@@ -41,6 +57,13 @@ class UserService {
     }
   }
 
+  /**
+   * Remove token from user.
+   *
+   * @param {string} token Auth token
+   * @returns {boolean}
+   * @memberof UserService
+   */
   async removeToken(token) {
     let foundUser = null;
 

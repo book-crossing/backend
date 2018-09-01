@@ -21,6 +21,13 @@ class Book {
     this.info = { ...defaultValues, ...info };
   }
 
+  /**
+   * Parse data for a new book.
+   *
+   * @param {*} [bookFromAPI={}]
+   * @returns Book
+   * @memberof Book
+   */
   parse (bookFromAPI = {}) {
     Object.keys(ParserConfig).forEach(key => {
       if (typeof ParserConfig[key] === 'string') {
