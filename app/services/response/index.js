@@ -32,8 +32,19 @@ class ResponseBuilder {
    * @returns {function}
    * @memberof ResponseBuilder
    */
-  message (message) {
+  message(message) {
     return this.build({ status: 'ok', message })
+  }
+
+  /**
+   * Builds a payload response
+   *
+   * @param {*} payload
+   * @returns {function}
+   * @memberof ResponseBuilder
+   */
+  payload(payload) {
+    return this.build({ payload })
   }
 
   /**

@@ -44,7 +44,7 @@ class UserController {
           result[el] = user[el];
         });
 
-        return $Response.message(result);
+        return $Response.payload(result);
       } else {
         return $Response.buildFromError(1005);
       }
