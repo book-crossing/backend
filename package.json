@@ -4,6 +4,7 @@
   "description": "Bookcrossing backend app",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon",
     "dev": "nodemon"
   },
   "repository": {},
