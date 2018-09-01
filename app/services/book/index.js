@@ -87,7 +87,7 @@ class BookService {
         // newBook.info.ownedBy.push(username);
         return newBook;
       } else {
-        newBook.info.registeredAt = Math.ceil(new Date().getTime() / 1000);
+        newBook.info.registeredAt = new Date().getTime();
         let insertionResult = await this.collection.insertOne(newBook.info);
 
         if (newBook.info.uid && insertionResult.result.ok) {

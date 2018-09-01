@@ -103,7 +103,7 @@ class UserController {
 
     // add new user
     try {
-      let ts = Math.round((new Date()).getTime() / 1000);
+      let ts = new Date().getTime();
       let insertionResult = await $User.collection.insertOne({
         username,
         password,
@@ -166,7 +166,7 @@ class UserController {
       // generate and attach new token
       let newToken;
       try {
-        let ts = Math.round((new Date()).getTime() / 1000);
+        let ts = new Date().getTime();
         newToken = $Misc.sha512(`${$Config.get('app.tokensalt')}${ts}`, $Config.get('app.salt'));
         await $User.collection.updateOne({ username }, { $addToSet: { tokens: { value: newToken, date: ts } } });
       } catch (e) {
