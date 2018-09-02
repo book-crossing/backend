@@ -1,6 +1,14 @@
 const $Response = use('ResponseService');
 
 class StaticController {
+
+  /**
+   * Render a file in response.
+   *
+   * @param {*} params
+   * @returns {function}
+   * @memberof StaticController
+   */
   render(params) {
     let type = params.type || '';
     let filepath = params.file || 'index.html';
