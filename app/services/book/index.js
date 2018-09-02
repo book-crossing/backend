@@ -5,6 +5,11 @@ const $Events = use('EventService');
 const $DB = use('DBService');
 const $User = use('UserService');
 
+/**
+ * Book Service
+ *
+ * @class BookService
+ */
 class BookService {
   constructor () {
     this.Book = Book;
