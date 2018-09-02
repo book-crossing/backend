@@ -95,7 +95,7 @@ class ResponseBuilder {
       fs.exists(pathname, function (exist) {
         if (!exist) {
           // if the file is not found, return 404
-          response.statusCode = 404;
+          response.writeHead(404);
           response.end(`File ${pathname} not found!`);
           return;
         }
@@ -106,7 +106,7 @@ class ResponseBuilder {
         // read file from file system
         fs.readFile(pathname, function (err, data) {
           if (err) {
-            response.statusCode = 500;
+            response.writeHead(500);
             response.end(`Error getting the file: ${err}.`);
           } else {
             // based on the URL path, extract the file extention. e.g. .js, .doc, ...
