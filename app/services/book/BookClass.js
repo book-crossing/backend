@@ -16,6 +16,11 @@ const ParserConfig = {
   publishedAt: 'volumeInfo.publishedDate'
 }
 
+/**
+ * Everything you need to work with books
+ *
+ * @class Book
+ */
 class Book {
   constructor (info = {}) {
     this.info = { ...defaultValues, ...info };
