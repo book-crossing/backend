@@ -27,7 +27,7 @@ class BookController {
     try {
       let foundBooks = await $Book.vendorFind(params.body.id);
       let bookData = foundBooks[0];
-      let newBook = new $Book.Book({ comment: params.body.comment || '' }).parse(bookData);
+      let newBook = (new $Book.Book({ comment: params.body.comment || '' })).parse(bookData);
       let book = await $Book.add(newBook, params.token);
       return $Response.payload(book);
     } catch (e) {
@@ -50,7 +50,7 @@ class BookController {
 
     try {
       let uid = $Misc.sha512(JSON.stringify(params.body.info), $Config.get('app.salt'));
-      let newBook = new $Book.Book({ uid, comment: params.body.comment || '' }).parse(params.body.info);
+      let newBook = (new $Book.Book({ uid, comment: params.body.comment || '' })).parse(params.body.info);
       let book = await $Book.add(newBook, params.token);
       return $Response.payload(book);
     } catch (e) {
