@@ -3,6 +3,7 @@ const $Response = use('ResponseService');
 const $Book = use('BookService');
 const $User = use('UserService');
 const $Misc = use('MiscService');
+const $Config = use('Config');
 
 /**
  * Controller for handling book specific requests.
