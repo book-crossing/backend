@@ -6,7 +6,7 @@ class StaticController {
    * Render a file in response.
    *
    * @param {*} params
-   * @returns {function}
+   * @returns {*} Response
    * @memberof StaticController
    */
   render(params) {
