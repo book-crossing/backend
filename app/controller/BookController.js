@@ -50,7 +50,7 @@ class BookController {
 
     try {
       let uid = $Misc.sha512(JSON.stringify(params.body.info), $Config.get('app.salt'));
-      let newBook = (new $Book.Book({ uid, comment: params.body.comment || '' })).parse(params.body.info);
+      let newBook = (new $Book.Book({ uid, ...params.body.info }));
       let book = await $Book.add(newBook, params.token);
       return $Response.payload(book);
     } catch (e) {
