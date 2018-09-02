@@ -113,6 +113,8 @@ class UserController {
     // add new user
     try {
       let ts = new Date().getTime();
+
+      // TODO REFACTOR
       let insertionResult = await $User.collection.insertOne({
         username,
         password,
