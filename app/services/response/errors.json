@@ -2,7 +2,10 @@
   "1": "Server error.",
 
   "10": "Server error: Database connection error.",
-  "11": "Server error: Database insertion error.",
+  "11": "Server error: Database insert error.",
+  "12": "Server error: Database update error.",
+
+  "404": "Route is not implemented.",
 
   "1000": "Username must be a string.",
   "1001": "Username is already taken.",
@@ -10,12 +13,19 @@
   "1003": "Username length must be more then 2 characters.",
   "1004": "Username must have only digits and letters.",
   "1005": "User not found.",
+  "1006": "Username is required.",
 
   "2000": "Password must be a string.",
   "2001": "Password must not be empty.",
   "2002": "Password length must be more then 5 characters.",
   "2003": "Wrong password.",
+  "2004": "Password is required.",
 
   "3000": "Token is expired.",
-  "3001": "Token is required."
+  "3001": "Token is required.",
+
+  "4000": "Book owner not found.",
+  "4001": "Book not found.",
+  "4002": "Book id is required.",
+  "4003": "Book owner is required."
 }

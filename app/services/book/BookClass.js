@@ -1,3 +1,12 @@
+const defaultValues = {
+  isActive: true,
+  tookCount: 0,
+  ownedBy: [],
+  claimedBy: [],
+  comment: null,
+  queue: []
+}
+
 const ParserConfig = {
   uid: 'id',
   authors: 'volumeInfo.authors',
@@ -7,14 +16,34 @@ const ParserConfig = {
   publishedAt: 'volumeInfo.publishedDate'
 }
 
+/**
+ * Everything you need to work with books
+ *
+ * @class Book
+ */
 class Book {
   constructor (info = {}) {
-    this.info = info;
+    this.info = { ...defaultValues, ...info };
   }
 
-  parse (bookFromAPI) {
+  /**
+   * Parse data for a new book.
+   *
+   * @param {*} [bookFromAPI={}]
+   * @returns Book
+   * @memberof Book
+   */
+  parse(bookFromAPI = {}) {
     Object.keys(ParserConfig).forEach(key => {
-      this.info[key] = ParserConfig[key].split('.').reduce((o, i) => (o === Object(o) ? o[i] : o), bookFromAPI);
+      if (typeof ParserConfig[key] === 'string') {
+        if (ParserConfig[key][0] !== '=') {
+          this.info[key] = ParserConfig[key].split('.').reduce((o, i) => (o === Object(o) ? o[i] : o), bookFromAPI);
+        } else {
+          this.info[key] = ParserConfig[key].replace('=', '');
+        }
+      } else {
+        this.info[key] = ParserConfig[key]
+      }
     })
     return this;
   }

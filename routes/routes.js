@@ -18,14 +18,21 @@ const Route = use('Router');
  */
 
 const routes = (route) => ({
+  '/': route('GET', 'StaticController@render'),
+  'static/:type/:file': route('GET', 'StaticController@render'),
   'api': {
     'user': {
-      'register': route('POST', 'UserController@register', { middleware: 'body-parser' }),
-      'login': route('POST', 'UserController@login', { middleware: 'body-parser' }),
-      'logout': route('POST', 'UserController@logout', { middleware: 'check-token' }),
+      'register': route('POST', 'UserController@register', { middleware: ['check-db', 'body-parser'] }),
+      'login': route('POST', 'UserController@login', { middleware: ['check-db', 'body-parser'] }),
+      'logout': route('GET', 'UserController@logout', { middleware: ['check-db', 'auth'] }),
+      ':username': {
+        '/': route('GET', 'UserController@index', { middleware: ['check-db'] })
+      }
     },
     'book': {
-      'test': route('POST', 'BookController@test', { middleware: 'body-parser' })
+      'add': route('POST', 'BookController@add', { middleware: ['check-db', 'check-token'] }),
+      'list': route('GET', 'BookController@list', { middleware: ['check-db'] }),
+      'claim': route('POST', 'BookController@claim', { middleware: ['check-db', 'check-token'] }),
     }
   }
 })

@@ -4,6 +4,7 @@
   "description": "Bookcrossing backend app",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon",
     "dev": "nodemon"
   },
   "repository": {},
@@ -12,7 +13,8 @@
   "dependencies": {
     "ivy-js": "git://github.com/VeryWow/ivy-js.git#1.0",
     "js-simple-events": "^1.0.7",
-    "mongodb": "~3.0.8"
+    "mongodb": "~3.0.8",
+    "node-fetch": "^2.2.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.3"
