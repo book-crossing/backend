@@ -30,7 +30,29 @@ class BookController {
       return $Response.payload(book);
     } catch (e) {
       console.error(e);
-      return $Response.buildFromError(1, 'Trying to add a new book. ' + e.message);
+      return $Response.buildFromError(1, 'Trying to add a new vendor book. ' + e.message);
+    }
+  }
+
+  /**
+   * Add new custom book.
+   *
+   * @param {*} params
+   * @returns {*} Response
+   * @memberof BookController
+   */
+  async addCustom(params) {
+    if (!params.body.info) {
+      return $Response.buildFromError(4004);
+    }
+
+    try {
+      let newBook = new $Book.Book({ comment: params.body.comment || '' }).parse(params.body.info);
+      let book = await $Book.add(newBook, params.token);
+      return $Response.payload(book);
+    } catch (e) {
+      console.error(e);
+      return $Response.buildFromError(1, 'Trying to add a new custom book. ' + e.message);
     }
   }
 
