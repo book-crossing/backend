@@ -27,5 +27,6 @@
   "4000": "Book owner not found.",
   "4001": "Book not found.",
   "4002": "Book id is required.",
-  "4003": "Book owner is required."
+  "4003": "Book owner is required.",
+  "4004": "Book info is required."
 }
